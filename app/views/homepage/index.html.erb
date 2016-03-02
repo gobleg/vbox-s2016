@@ -1,10 +1,44 @@
-<div id="map"></div>
+<div class="row">
+    <div class="col-xs-12 text-center">
+        <h1>Employee Name</h1>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-2">
+        <div class="row">
+            <div class="col-xs-12 text-center">
+                <div class="dropdown">
+                    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+                        Select Employee
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">test</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 text-center">
+                <button type="submit" class="btn btn-default">New Employee</button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 text-center">
+                <button type="submit" class="btn btn-default">Upload Data</button>
+            </div>
+        </div>
+    </div>
+    <div class="col-xs-10">
+        <div id="map"></div>
+    </div>
+</div>
 <script>
     function initMap() {
         var mapDiv = document.getElementById('map');
         var map = new google.maps.Map(mapDiv, {
-            center: {lat: 44.540, lng: -78.546},
-            zoom: 8
+            center: {lat: 30.619024, lng: -96.338804},
+            zoom: 11
         });
     }
 </script>

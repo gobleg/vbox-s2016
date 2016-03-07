@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
+  get 'uploaddata/index'
+
+  get 'newemployee/index'
+
+  get 'newuser/index'
+
   get 'homepage/index'
 
   get 'login/index'

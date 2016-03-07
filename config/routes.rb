@@ -1,13 +1,13 @@
 Rails.application.routes.draw do
-  get 'uploaddata/index'
+  get 'uploaddata/index', as: 'uploaddata'
 
-  get 'newemployee/index'
+  get 'newemployee/index', as: 'newemployee'
 
-  get 'newuser/index'
+  get 'newuser/index', as: 'newuser'
 
-  get 'homepage/index'
+  get 'homepage/index', as: 'homepage'
 
-  get 'login/index'
+  get 'login/index', as: 'login'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

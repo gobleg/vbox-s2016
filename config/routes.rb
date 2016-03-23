@@ -3,11 +3,7 @@ Rails.application.routes.draw do
 
   get 'newemployee/index', as: 'newemployee'
 
-  get 'newuser/index', as: 'newuser'
-
   get 'homepage/index', as: 'homepage'
-
-  get 'login/index'
 
   get '/login' => 'sessions#new', as: 'login'
   post '/login' => 'sessions#create'

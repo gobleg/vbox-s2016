@@ -1,4 +1,6 @@
 class HomepageController < ApplicationController
-  def index
-  end
+    before_filter :authorize
+
+    def index
+    end
 end

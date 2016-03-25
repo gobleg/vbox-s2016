@@ -1,16 +1,16 @@
 Rails.application.routes.draw do
   get 'uploaddata/index', as: 'uploaddata'
 
-  get 'newemployee/index', as: 'newemployee'
-
-  get 'homepage/index', as: 'homepage'
-
   get '/login' => 'sessions#new', as: 'login'
   post '/login' => 'sessions#create'
   get '/logout' => 'sessions#destroy'
 
-  get '/signup' => 'users#new'
+  get '/signup' => 'users#new', as: 'signup'
   post '/users' => 'users#create'
+
+  get '/home/:id' => 'employees#show', as: 'home'
+  get '/addemployee' => 'employees#new', as: 'addemployee'
+  post '/employees' => 'employees#create'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

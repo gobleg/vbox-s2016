@@ -26,6 +26,9 @@ class EmployeesController < ApplicationController
             @employee = @employees_list.first
         else
             @employee = Employee.find(id)
+            if @employee.user_id != current_user.id
+                redirect_to home_path(0)
+            end
         end
     end
 

@@ -8,7 +8,10 @@
                         <span class="caret"></span>
                     </button>
                     <ul class="dropdown-menu">
-                        <li><a href="#">test</a></li>
+                        <% @employees_list.each do |e| %>
+                            <!--<li><a href=></a></li>-->
+                            <li><%= link_to e.name, home_path(e.id) %></li>
+                        <% end %>
                     </ul>
                 </div>
             </div>

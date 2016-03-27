@@ -1,15 +1,25 @@
 <div class="row">
-    <div class="col-sm-2">
+    <div class="col-sm-2 text-center">
+    </div>
+    <div class="col-sm-10 text-center">
+        <div class="row">
+            <div class="col-sm-12 text-center">
+                <h1><%= @employee.name %></h1>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-2 text-center">
         <div class="row">
             <div class="col-sm-12 text-center">
                 <div class="dropdown">
                     <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
-                        Select Employee
+                        Employee
                         <span class="caret"></span>
                     </button>
                     <ul class="dropdown-menu">
                         <% @employees_list.each do |e| %>
-                            <!--<li><a href=></a></li>-->
                             <li><%= link_to e.name, home_path(e.id) %></li>
                         <% end %>
                     </ul>
@@ -27,13 +37,7 @@
             </div>
         </div>
     </div>
-    <div class="col-sm-10">
-        <div class="row">
-            <div class="col-sm-12 text-center">
-                <!--<h1>Employee Name</h1>-->
-                <h1><%= @employee.name %></h1>
-            </div>
-        </div>
+    <div class="col-sm-10 text-center">
         <div class="row">
             <div class="col-sm-12">
                 <div id="map"></div>

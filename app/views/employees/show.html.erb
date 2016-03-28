@@ -55,10 +55,16 @@
 </div>
 <script>
     function initMap() {
+        var location1 = {lat:30.5879615, lng: -96.3344641};
         var mapDiv = document.getElementById('map');
         var map = new google.maps.Map(mapDiv, {
             center: {lat: 30.619024, lng: -96.338804},
             zoom: 11
+        });
+
+        var marker = new google.maps.Marker({
+            position: location1,
+            map: map
         });
     }
 </script>

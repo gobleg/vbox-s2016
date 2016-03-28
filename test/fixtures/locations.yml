@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  lat: 9.99
+  lng: 9.99
+  time: 2016-03-27 18:59:21
+
+two:
+  lat: 9.99
+  lng: 9.99
+  time: 2016-03-27 18:59:21

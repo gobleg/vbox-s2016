@@ -5,3 +5,22 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+Location.all().each do |loc|
+    loc.destroy!()
+end
+
+Employee.all().each do |emp|
+    emp.destroy!()
+end
+
+User.all().each do |user|
+    user.destroy!()
+end
+
+user = User.create(email: 'fake@fake.com', password_digest: User.digest('bob') )
+employee1 = user.employees.create!(name: 'Hunter', eid: 1)
+employee2 = user.employees.create!(name: 'Tyler', eid: 2)
+employee1.locations.create!(lat: 30.5879615, lng: -96.3344641, time: Time.now)
+employee1.locations.create!(lat: 30.585, lng: -96.3, time: Time.now)
+employee2.locations.create!(lat: 30.59, lng: -96.33, time: Time.now)
+employee2.locations.create!(lat: 30.595, lng: -96.335, time: Time.now)

@@ -24,8 +24,12 @@ class EmployeesController < ApplicationController
             redirect_to addemployee_path
         elsif id == "0"
             @employee = @employees_list.first
+            @locations = @employee.locations
+            @times = @locations.map { |location| location['time'].strftime("%H:%M:%S %p %b %d, %Y") }
         else
             @employee = Employee.find(id)
+            @locations = @employee.locations
+            @times = @locations.map { |location| location['time'].strftime("%H:%M:%S %p %b %d, %Y") }
             if @employee.user_id != current_user.id
                 redirect_to home_path(0)
             end

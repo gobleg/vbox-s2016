@@ -4,6 +4,7 @@ class CreateLocations < ActiveRecord::Migration
       t.decimal :lat
       t.decimal :lng
       t.datetime :time
+      t.references :employee, index: true, foreign_key: true
 
       t.timestamps null: false
     end

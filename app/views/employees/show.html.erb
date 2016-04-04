@@ -1,3 +1,5 @@
+<%= content_tag :div, class: "temp_information", data: {locations: @locations, times: @times} do %>
+<% end %>
 <div class="row">
     <div class="col-sm-2 text-center">
     </div>
@@ -55,17 +57,41 @@
 </div>
 <script>
     function initMap() {
-        var location1 = {lat:30.5879615, lng: -96.3344641};
+        //var location1 = {lat: 30.5879615, lng: -96.3344641};
+        var locations = $('.temp_information').data('locations');
+        var times = $('.temp_information').data('times');
+        var locations_c = [];
+        var timestamps = [];
+        for (var i = 0; i < locations.length; i++) {
+            locations_c.push({
+                lat: parseFloat(locations[i]["lat"]),
+                lng: parseFloat(locations[i]["lng"])
+            });
+            timestamps.push(times[i]);
+        }
         var mapDiv = document.getElementById('map');
         var map = new google.maps.Map(mapDiv, {
-            center: {lat: 30.619024, lng: -96.338804},
-            zoom: 11
+            center: locations_c[0],
+            zoom: 15
         });
 
-        var marker = new google.maps.Marker({
-            position: location1,
-            map: map
-        });
+        var infowindows = [];
+        var markers = [];
+        for (var i = 0; i < locations_c.length; i++) {
+            infowindows.push(new google.maps.InfoWindow({
+                content: timestamps[i]
+            }));
+            markers.push(new google.maps.Marker({
+                position: locations_c[i],
+                map: map
+            }));
+            console.log(infowindows[i]);
+            google.maps.event.addListener(markers[i], 'click', (function(marker, i) {
+                return function() {
+                    infowindows[i].open(map, markers[i]);
+                }
+            })(markers[i], i));
+        }
     }
 </script>
 <script src="https://maps.googleapis.com/maps/api/js?callback=initMap" async defer></script>

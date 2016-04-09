@@ -2,7 +2,7 @@ class SessionsController < ApplicationController
 
     def new
        if current_user
-           redirect_to home_path(0)
+           redirect_to home_path(0, 0)
        end
     end
 
@@ -10,7 +10,7 @@ class SessionsController < ApplicationController
         user = User.find_by_email(params[:email])
         if user && user.authenticate(params[:password])
             session[:user_id] = user.id
-            redirect_to home_path(0)
+            redirect_to home_path(0, 0)
         else
             flash[:alert] = "Invalid Login"
             redirect_to login_path

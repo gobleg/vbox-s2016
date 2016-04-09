@@ -22,7 +22,7 @@
                     </button>
                     <ul class="dropdown-menu">
                         <% @employees_list.each do |e| %>
-                            <li><%= link_to e.name, home_path(e.id) %></li>
+                            <li><%= link_to e.name, home_path(e.id, 0) %></li>
                         <% end %>
                     </ul>
                 </div>
@@ -38,11 +38,31 @@
                 <%= link_to 'Upload Data', uploaddata_path, class: 'btn btn-default' %>
             </div>
         </div>
+        <div class="row">
+            <div class="col-sm-12 text-center">
+                <div class="dropdown">
+                    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+                        Date
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <% @dates.each do |d| %>
+                            <li><%= link_to d, home_path(@employee.id, d) %></li>
+                        <% end %>
+                    </ul>
+                </div>
+            </div>
+        </div>
     </div>
     <div class="col-sm-10 text-center">
         <div class="row">
             <div class="col-sm-12">
                 <div id="map"></div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <h3>Locations for <%= @display_date %></h3>
             </div>
         </div>
         <div class="row">

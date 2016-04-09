@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160327235921) do
+ActiveRecord::Schema.define(version: 20160409183415) do
 
   create_table "employees", force: :cascade do |t|
     t.string   "name"
@@ -40,5 +40,18 @@ ActiveRecord::Schema.define(version: 20160327235921) do
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
   end
+
+  create_table "videos", force: :cascade do |t|
+    t.datetime "time"
+    t.integer  "employee_id"
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+    t.string   "dash_video_file_name"
+    t.string   "dash_video_content_type"
+    t.integer  "dash_video_file_size"
+    t.datetime "dash_video_updated_at"
+  end
+
+  add_index "videos", ["employee_id"], name: "index_videos_on_employee_id"
 
 end

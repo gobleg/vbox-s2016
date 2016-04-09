@@ -26,6 +26,7 @@ gem 'sprockets-rails', '>= 2.3.2'
 source 'https://rails-assets.org' do
     gem 'rails-assets-tether', '>= 1.1.0'
 end
+gem 'paperclip', '~> 5.0.0.beta1'
 
 # Use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1.7'

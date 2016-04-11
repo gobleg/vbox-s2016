@@ -9,6 +9,10 @@ Location.all().each do |loc|
     loc.destroy!()
 end
 
+Video.all().each do |vid|
+    vid.destroy!()
+end
+
 Employee.all().each do |emp|
     emp.destroy!()
 end

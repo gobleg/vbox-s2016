@@ -29,6 +29,9 @@ class EmployeesController < ApplicationController
             if date == "0"
                 all_dates = all_locations.map { |location| location['time'] }
                 most_recent_date = all_dates.max
+                if most_recent_date.nil?
+                    most_recent_date = Time.now
+                end
                 @display_date = most_recent_date.strftime("%b %d, %Y")
                 @locations = Location.where("time BETWEEN ? AND ? AND employee_id = ?", most_recent_date.beginning_of_day, most_recent_date.end_of_day, @employee.id).all
             else
@@ -45,6 +48,9 @@ class EmployeesController < ApplicationController
             if date == "0"
                 all_dates = all_locations.map { |location| location['time'] }
                 most_recent_date = all_dates.max
+                if most_recent_date.nil?
+                    most_recent_date = Time.now
+                end
                 @display_date = most_recent_date.strftime("%b %d, %Y")
                 @locations = Location.where("time BETWEEN ? AND ? AND employee_id = ?", most_recent_date.beginning_of_day, most_recent_date.end_of_day, @employee.id).all
             else

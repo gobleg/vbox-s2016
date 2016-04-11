@@ -22,7 +22,7 @@
                     </button>
                     <ul class="dropdown-menu">
                         <% @employees_list.each do |e| %>
-                            <li><%= link_to e.name, home_path(e.id, 0) %></li>
+                            <li><%= link_to e.name + " (" + e.eid.to_s + ")", home_path(e.id, 0) %></li>
                         <% end %>
                     </ul>
                 </div>

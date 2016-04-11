@@ -24,4 +24,7 @@
             <input class="btn btn-default" type="submit" name="commit" value="Upload Data" />
         </div>
     </div>
+    <% if flash[:alert] %>
+        <div class="alert alert-danger"><%= flash[:alert] %></div>
+    <% end %>
 </form>

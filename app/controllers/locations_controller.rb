@@ -6,6 +6,7 @@ class LocationsController < ApplicationController
 
     def create
         require 'csv'
+        require 'date'
 
         #logger.debug "params: #{params}"
         locations_files = params[:locations]
@@ -21,7 +22,7 @@ class LocationsController < ApplicationController
                 #logger.debug "file_path: #{file.path}"
                 if File.extname(file.path) == ".loc"
                     CSV.foreach(file.path) do |row|
-                        location = Location.new(lat: row[0], lng: row[1], time: row[2])
+                        location = Location.new(lat: row[0], lng: row[1], time: Time.at(Integer(row[2])).to_datetime)
                         @employee.locations << location
                         @employee.save
                         location.save

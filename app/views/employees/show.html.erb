@@ -80,7 +80,9 @@
                         <p>Stats and stuff</p>
                     </div>
                     <div role="tabpanel" class="tab-pane" id="incidents">
-                        <p>Incidents and stuff</p>
+                        <% @employee.videos.each do |vid| %>
+                            <%= video_tag vid.dash_video.url, controls: true, style: "max-width: 100%;" %>
+                        <% end %>
                     </div>
                 </div>
             </div>

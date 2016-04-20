@@ -8,7 +8,6 @@ class LocationsController < ApplicationController
         require 'csv'
         require 'date'
 
-        #logger.debug "params: #{params}"
         input_files = params[:inputFiles]
         @employee = Employee.where("name = ? AND eid = ?", params[:employee][:name], params[:employee][:eid]).take
         if @employee.nil?
@@ -20,7 +19,6 @@ class LocationsController < ApplicationController
         else
             logger.debug "#{input_files}"
             for file in input_files
-                logger.debug "test"
                 if File.extname(file["attributes"].path) == ".loc"
                     CSV.foreach(file["attributes"].path) do |row|
                         location = Location.new(lat: row[0], lng: row[1], time: Time.at(Integer(row[2])).to_datetime)
@@ -29,7 +27,9 @@ class LocationsController < ApplicationController
                         location.save
                     end
                 elsif File.extname(file["attributes"].path) == ".mp4"
-                    video = Video.create(:dash_video => file["attributes"])
+                    time = file["attributes"].original_filename.split('.')[0]
+                    logger.debug "#{time}"
+                    video = Video.create(:dash_video => file["attributes"], :time => Time.at(Integer(time)))
                     @employee.videos << video
                     @employee.save
                     video.save

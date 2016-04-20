@@ -32,15 +32,15 @@ class EmployeesController < ApplicationController
                 if most_recent_date.nil?
                     most_recent_date = Time.now
                 end
-                @display_date = most_recent_date.strftime("%b %d, %Y")
+                @display_date = most_recent_date.in_time_zone("Central Time (US & Canada)").strftime("%b %d, %Y")
                 @locations = Location.where("time BETWEEN ? AND ? AND employee_id = ?", most_recent_date.beginning_of_day, most_recent_date.end_of_day, @employee.id).all
             else
                 date_p = DateTime.strptime(date, "%b %d, %Y")
                 @display_date = date
                 @locations = Location.where("time BETWEEN ? AND ? AND employee_id = ?", date_p.beginning_of_day, date_p.end_of_day, @employee.id).all
             end
-            @times = @locations.map { |location| location['time'].strftime("%H:%M:%S %p %b %d, %Y") }
-            @dates = all_locations.map { |location| location['time'].strftime("%b %d, %Y") }
+            @times = @locations.map { |location| location['time'].in_time_zone("Central Time (US & Canada)").strftime("%I:%M:%S %p %b %d, %Y") }
+            @dates = all_locations.map { |location| location['time'].in_time_zone("Central Time (US & Canada)").strftime("%b %d, %Y") }
             @dates = @dates.uniq
         else
             @employee = Employee.find(id)
@@ -51,15 +51,15 @@ class EmployeesController < ApplicationController
                 if most_recent_date.nil?
                     most_recent_date = Time.now
                 end
-                @display_date = most_recent_date.strftime("%b %d, %Y")
+                @display_date = most_recent_date.in_time_zone("Central Time (US & Canada)").strftime("%b %d, %Y")
                 @locations = Location.where("time BETWEEN ? AND ? AND employee_id = ?", most_recent_date.beginning_of_day, most_recent_date.end_of_day, @employee.id).all
             else
                 date_p = DateTime.strptime(date, "%b %d, %Y")
                 @display_date = date
                 @locations = Location.where("time BETWEEN ? AND ? AND employee_id = ?", date_p.beginning_of_day, date_p.end_of_day, @employee.id).all
             end
-            @times = @locations.map { |location| location['time'].strftime("%H:%M:%S %p %b %d, %Y") }
-            @dates = all_locations.map { |location| location['time'].strftime("%b %d, %Y") }
+            @times = @locations.map { |location| location['time'].in_time_zone("Central Time (US & Canada)").strftime("%I:%M:%S %p %b %d, %Y") }
+            @dates = all_locations.map { |location| location['time'].in_time_zone("Central Time (US & Canada)").strftime("%b %d, %Y") }
             @dates = @dates.uniq
             if @employee.user_id != current_user.id
                 redirect_to home_path(0, 0)

@@ -81,6 +81,7 @@
                     </div>
                     <div role="tabpanel" class="tab-pane" id="incidents">
                         <% @employee.videos.each do |vid| %>
+                            <h4>Incident at <%= vid.time.in_time_zone("Central Time (US & Canada)").strftime("%I:%M:%S %p %b %d, %Y") %></h4>
                             <%= video_tag vid.dash_video.url, controls: true, style: "max-width: 100%;" %>
                         <% end %>
                     </div>

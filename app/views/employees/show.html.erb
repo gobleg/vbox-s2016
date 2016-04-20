@@ -12,11 +12,11 @@
     </div>
 </div>
 <div class="row">
-    <div class="col-sm-2 text-center">
+    <div class="col-sm-3 text-center">
         <div class="row">
-            <div class="col-sm-12 text-center">
-                <div class="dropdown">
-                    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+            <div class="col-sm-12 text-center btn-block">
+                <div class="dropdown btn-block">
+                    <button class="btn btn-primary btn-block dropdown-toggle" type="button" data-toggle="dropdown">
                         Employee
                         <span class="caret"></span>
                     </button>
@@ -26,22 +26,10 @@
                         <% end %>
                     </ul>
                 </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-12 text-center">
-                <%= link_to 'New Employee', addemployee_path, class: 'btn btn-default' %>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-12 text-center">
-                <%= link_to 'Upload Data', upload_path, class: 'btn btn-default' %>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-12 text-center">
-                <div class="dropdown">
-                    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+                <%= link_to 'New Employee', addemployee_path, class: 'btn btn-default btn-block' %>
+                <%= link_to 'Upload Data', upload_path, class: 'btn btn-default btn-block' %>
+                <div class="dropdown btn-block">
+                    <button class="btn btn-primary btn-block dropdown-toggle" type="button" data-toggle="dropdown">
                         Date
                         <span class="caret"></span>
                     </button>
@@ -54,7 +42,7 @@
             </div>
         </div>
     </div>
-    <div class="col-sm-10 text-center">
+    <div class="col-sm-9 text-center">
         <div class="row">
             <div class="col-sm-12">
                 <div id="map"></div>
@@ -77,7 +65,24 @@
             <div class="col-sm-12">
                 <div class="tab-content">
                     <div role="tabpanel" class="tab-pane active" id="stats">
-                        <p>Stats and stuff</p>
+                        <div class="table-responsive">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Col1</th>
+                                        <th>Col2</th>
+                                        <th>Col3</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Data1</td>
+                                        <td>Data2</td>
+                                        <td>Data3</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                     <div role="tabpanel" class="tab-pane" id="incidents">
                         <% @employee.videos.each do |vid| %>

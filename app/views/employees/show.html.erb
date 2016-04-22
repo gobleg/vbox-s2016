@@ -64,7 +64,7 @@
         <div class="row">
             <div class="col-sm-12">
                 <div class="tab-content">
-                    <div role="tabpanel" class="tab-pane active" id="stats">
+                    <div role="tabpanel" class="tab-pane" id="stats">
                         <% if not @obds.empty? %>
                             <h4>RPM</h4>
                             <%= line_chart @obds.map{|obd| [obd.time, obd.rpm]} %>
@@ -114,7 +114,7 @@
                             <h4>No Driving Stats Available</h4>
                         <% end %>
                     </div>
-                    <div role="tabpanel" class="tab-pane" id="incidents">
+                    <div role="tabpanel" class="tab-pane active" id="incidents">
                         <% if not @employee.videos.empty? %>
                             <% @employee.videos.each do |vid| %>
                                 <h4>Incident at <%= vid.time.strftime("%I:%M:%S %p %b %d, %Y") %></h4>

@@ -50,7 +50,7 @@ class EmployeesController < ApplicationController
             @times = @locations.map { |location| location['time'].strftime("%I:%M:%S %p %b %d, %Y") }
             @dates = all_locations.map { |location| location['time'].strftime("%b %d, %Y") }
             @dates += all_obds.map { |obd| obd['time'].strftime("%b %d, %Y") }
-            @dates = @dates.uniq
+            @dates = @dates.uniq.sort
             if @employee.user_id != current_user.id
                 redirect_to home_path(0, 0)
             end

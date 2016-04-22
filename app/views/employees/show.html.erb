@@ -65,20 +65,30 @@
             <div class="col-sm-12">
                 <div class="tab-content">
                     <div role="tabpanel" class="tab-pane active" id="stats">
-                        <div class="table-responsive">
-                            <table class="table table-striped">
-                                <thead>
-                                    <tr>
-                                        <th>Time</th>
-                                        <th>RPM</th>
-                                        <th>MPH</th>
-                                        <th>Throttle</th>
-                                        <th>Intake Air Temp</th>
-                                        <th>Fuel Status</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <% if not @obds.empty? %>
+                        <% if not @obds.empty? %>
+                            <h4>RPM</h4>
+                            <%= line_chart @obds.map{|obd| [obd.time, obd.rpm]} %>
+                            <h4>MPH</h4>
+                            <%= line_chart @obds.map{|obd| [obd.time, obd.mph]} %>
+                            <h4>Throttle</h4>
+                            <%= line_chart @obds.map{|obd| [obd.time, obd.throttle]} %>
+                            <h4>Intake Air Temperature</h4>
+                            <%= line_chart @obds.map{|obd| [obd.time, obd.intake_air_temp]} %>
+                            <h4>Fuel Status</h4>
+                            <%= line_chart @obds.map{|obd| [obd.time, obd.fuel_status]} %>
+                            <div class="table-responsive">
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>Time</th>
+                                            <th>RPM</th>
+                                            <th>MPH</th>
+                                            <th>Throttle</th>
+                                            <th>Intake Air Temp</th>
+                                            <th>Fuel Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
                                         <tr>
                                             <td>Average for Day</td>
                                             <td><%= (@obds.inject(0){|sum, obd| sum + obd.rpm}/@obds.size).round(2)%></td>
@@ -87,25 +97,31 @@
                                             <td><%= (@obds.inject(0){|sum, obd| sum + obd.intake_air_temp}/@obds.size).round(2) %></td>
                                             <td><%= (@obds.inject(0){|sum, obd| sum + obd.fuel_status}/@obds.size).round(2) %></td>
                                         </tr>
-                                    <% end %>
-                                    <% @obds.each do |obd| %>
-                                        <tr>
-                                            <td><%=obd.time.strftime("%I:%M:%S %p %b %d, %Y") %></td>
-                                            <td><%=(obd.rpm).round(2)%></td>
-                                            <td><%=(obd.mph).round(2)%></td>
-                                            <td><%=(obd.throttle).round(2)%></td>
-                                            <td><%=(obd.intake_air_temp).round(2)%></td>
-                                            <td><%=(obd.fuel_status).round(2)%></td>
-                                        </tr>
-                                    <% end %>
-                                </tbody>
-                            </table>
-                        </div>
+                                        <% @obds.each do |obd| %>
+                                            <tr>
+                                                <td><%=obd.time.strftime("%I:%M:%S %p %b %d, %Y") %></td>
+                                                <td><%=(obd.rpm).round(2)%></td>
+                                                <td><%=(obd.mph).round(2)%></td>
+                                                <td><%=(obd.throttle).round(2)%></td>
+                                                <td><%=(obd.intake_air_temp).round(2)%></td>
+                                                <td><%=(obd.fuel_status).round(2)%></td>
+                                            </tr>
+                                        <% end %>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <% else %>
+                            <h4>No Driving Stats Available</h4>
+                        <% end %>
                     </div>
                     <div role="tabpanel" class="tab-pane" id="incidents">
-                        <% @employee.videos.each do |vid| %>
-                            <h4>Incident at <%= vid.time.strftime("%I:%M:%S %p %b %d, %Y") %></h4>
-                            <%= video_tag vid.dash_video.url, controls: true, style: "max-width: 100%;" %>
+                        <% if not @employee.videos.empty? %>
+                            <% @employee.videos.each do |vid| %>
+                                <h4>Incident at <%= vid.time.strftime("%I:%M:%S %p %b %d, %Y") %></h4>
+                                <%= video_tag vid.dash_video.url, controls: true, style: "max-width: 100%;" %>
+                            <% end %>
+                        <% else %>
+                            <h4>No Driving Incidents</h4>
                         <% end %>
                     </div>
                 </div>

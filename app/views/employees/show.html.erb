@@ -50,7 +50,7 @@
         </div>
         <div class="row">
             <div class="col-sm-12">
-                <h3>Locations for <%= @display_date %></h3>
+                <h3>Data for <%= @display_date %></h3>
             </div>
         </div>
         <div class="row">
@@ -69,24 +69,42 @@
                             <table class="table table-striped">
                                 <thead>
                                     <tr>
-                                        <th>Col1</th>
-                                        <th>Col2</th>
-                                        <th>Col3</th>
+                                        <th>Time</th>
+                                        <th>RPM</th>
+                                        <th>MPH</th>
+                                        <th>Throttle</th>
+                                        <th>Intake Air Temp</th>
+                                        <th>Fuel Status</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>Data1</td>
-                                        <td>Data2</td>
-                                        <td>Data3</td>
-                                    </tr>
+                                    <% if not @obds.empty? %>
+                                        <tr>
+                                            <td>Average for Day</td>
+                                            <td><%= (@obds.inject(0){|sum, obd| sum + obd.rpm}/@obds.size).round(2)%></td>
+                                            <td><%= (@obds.inject(0){|sum, obd| sum + obd.mph}/@obds.size).round(2) %></td>
+                                            <td><%= (@obds.inject(0){|sum, obd| sum + obd.throttle}/@obds.size).round(2)%></td>
+                                            <td><%= (@obds.inject(0){|sum, obd| sum + obd.intake_air_temp}/@obds.size).round(2) %></td>
+                                            <td><%= (@obds.inject(0){|sum, obd| sum + obd.fuel_status}/@obds.size).round(2) %></td>
+                                        </tr>
+                                    <% end %>
+                                    <% @obds.each do |obd| %>
+                                        <tr>
+                                            <td><%=obd.time.strftime("%I:%M:%S %p %b %d, %Y") %></td>
+                                            <td><%=(obd.rpm).round(2)%></td>
+                                            <td><%=(obd.mph).round(2)%></td>
+                                            <td><%=(obd.throttle).round(2)%></td>
+                                            <td><%=(obd.intake_air_temp).round(2)%></td>
+                                            <td><%=(obd.fuel_status).round(2)%></td>
+                                        </tr>
+                                    <% end %>
                                 </tbody>
                             </table>
                         </div>
                     </div>
                     <div role="tabpanel" class="tab-pane" id="incidents">
                         <% @employee.videos.each do |vid| %>
-                            <h4>Incident at <%= vid.time.in_time_zone("Central Time (US & Canada)").strftime("%I:%M:%S %p %b %d, %Y") %></h4>
+                            <h4>Incident at <%= vid.time.strftime("%I:%M:%S %p %b %d, %Y") %></h4>
                             <%= video_tag vid.dash_video.url, controls: true, style: "max-width: 100%;" %>
                         <% end %>
                     </div>

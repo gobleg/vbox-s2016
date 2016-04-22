@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  time: 2016-04-21 17:14:54
+  rpm: 9.99
+  mph: 9.99
+  throttle: 9.99
+  intake_air_temp: 9.99
+  fuel_status: 9.99
+
+two:
+  time: 2016-04-21 17:14:54
+  rpm: 9.99
+  mph: 9.99
+  throttle: 9.99
+  intake_air_temp: 9.99
+  fuel_status: 9.99

@@ -13,6 +13,10 @@ Video.all().each do |vid|
     vid.destroy!()
 end
 
+Obd.all().each do |obd|
+    obd.destroy!()
+end
+
 Employee.all().each do |emp|
     emp.destroy!()
 end

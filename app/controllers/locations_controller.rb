@@ -34,7 +34,7 @@ class LocationsController < ApplicationController
                     video.save
                 elsif File.extname(file["attributes"].path) == ".obd"
                     CSV.foreach(file["attributes"].path) do |row|
-                        obd = Obd.new(time: Time.parse(row[0]), rpm: row[1].to_f, mph: row[2].to_f, throttle: row[3].to_f, intake_air_temp: row[4].to_f, fuel_status: row[5].to_f)
+                        obd = Obd.new(time: Time.at(Integer(row[0])), rpm: row[1].to_f, mph: row[2].to_f, throttle: row[3].to_f, intake_air_temp: row[4].to_f, fuel_status: row[5].to_f)
                         @employee.obds << obd
                         @employee.save
                         obd.save

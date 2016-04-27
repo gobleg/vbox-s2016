@@ -21,6 +21,9 @@ class LocationsController < ApplicationController
             for file in input_files
                 if File.extname(file["attributes"].path) == ".loc"
                     CSV.foreach(file["attributes"].path) do |row|
+                        if row.length != 3
+                            next
+                        end
                         location = Location.new(lat: row[0], lng: row[1], time: Time.at(Integer(row[2])).to_datetime)
                         @employee.locations << location
                         @employee.save
@@ -34,6 +37,9 @@ class LocationsController < ApplicationController
                     video.save
                 elsif File.extname(file["attributes"].path) == ".obd"
                     CSV.foreach(file["attributes"].path) do |row|
+                        if row.length != 6
+                            next
+                        end
                         obd = Obd.new(time: Time.at(row[0].to_f), rpm: row[1].to_f, mph: row[2].to_f, throttle: row[3].to_f, intake_air_temp: row[4].to_f, fuel_status: row[5].to_f)
                         @employee.obds << obd
                         @employee.save

@@ -51,6 +51,11 @@ class EmployeesController < ApplicationController
             @dates = all_locations.map { |location| location['time'].strftime("%b %d, %Y") }
             @dates += all_obds.map { |obd| obd['time'].strftime("%b %d, %Y") }
             @dates = @dates.uniq.sort
+            if not @employee.videos.nil?
+                @incident_times = @employee.videos.map { |video| video.time }
+                @incident_locations = @incident_times.map { |incident_time| @employee.locations.order("ABS(time - #{incident_time})").first }
+                @incident_times = @incident_times.map { |time| time.strftime("%I:%M:%S %p %b %d, %Y") }
+            end
             if @employee.user_id != current_user.id
                 redirect_to home_path(0, 0)
             end

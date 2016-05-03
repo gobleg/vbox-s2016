@@ -1,4 +1,4 @@
-<%= content_tag :div, class: "temp_information", data: {locations: @locations, times: @times, incidents_locations: @incident_locations, incident_times: @incident_times} do %>
+<%= content_tag :div, class: "temp_information", data: {locations: @locations, times: @times, incident_locations: @incident_locations, incident_times: @incident_times} do %>
 <% end %>
 <div class="row">
     <div class="col-sm-2 text-center">
@@ -134,8 +134,8 @@
         //var location1 = {lat: 30.5879615, lng: -96.3344641};
         var locations = $('.temp_information').data('locations');
         var times = $('.temp_information').data('times');
-        var incident_locations = $('.temp_information').data('incident_locations');
-        var incident_times = $('temp_information').data('incident_times');
+        var incident_locations = $('.temp_information').data('incident-locations');
+        var incident_times = $('.temp_information').data('incident-times');
         var locations_c = [];
         var timestamps = [];
         var i_locations_c = [];
@@ -153,11 +153,32 @@
                 lng: parseFloat(incident_locations[i]["lng"])
             });
             i_timestamps.push(incident_times[i]);
+        }
         var mapDiv = document.getElementById('google-map');
         var map = new google.maps.Map(mapDiv, {
             center: locations_c[0],
             zoom: 15
         });
+
+        i_infowindows = [];
+        var i_markers = [];
+        for (var i = 0; i < i_locations_c.length; i++) {
+            i_infowindows.push(new google.maps.InfoWindow({
+                content: i_timestamps[i]
+            }));
+            i_markers.push(new google.maps.Marker({
+                position: i_locations_c[i],
+                map: map,
+                zIndex: google.maps.Marker.MAX_ZINDEX + 1,
+                icon: 'http://maps.google.com/mapfiles/ms/icons/green-dot.png'
+            }));
+            console.log(i_infowindows[i]);
+            google.maps.event.addListener(i_markers[i], 'click', (function(marker, i) {
+                return function() {
+                    i_infowindows[i].open(map, i_markers[i]);
+                }
+            })(i_markers[i], i));
+        }
 
         var infowindows = [];
         var markers = [];
@@ -175,24 +196,6 @@
                     infowindows[i].open(map, markers[i]);
                 }
             })(markers[i], i));
-        }
-        i_infowindows = [];
-        var i_markers = [];
-        for (var i = 0; i < I-locations_c.length; i++) {
-            i_infowindows.push(new google.maps.InfoWindow({
-                content: i_timestamps[i]
-            }));
-            i_markers.push(new google.maps.Marker({
-                position: i_locations_c[i],
-                map: map,
-                icon: 'http://maps.google.com/mapfiles/ms/icons/green-dot.png'
-            }));
-            console.log(i_infowindows[i]);
-            google.maps.event.addListener(i_markers[i], 'click', (function(marker, i) {
-                return function() {
-                    i_infowindows[i].open(map, i_markers[i]);
-                }
-            })(i_markers[i], i));
         }
     }
 </script>
